@@ -76,6 +76,8 @@ export const PixelsScroller: FC = (): ReactNode => {
         let vel = 0
 
         let over = false
+        let wheelLock = false
+        let lockTimer = 0
         let cursorActive = false
         let cursorX = 0
         let cursorY = 0
@@ -129,13 +131,22 @@ export const PixelsScroller: FC = (): ReactNode => {
             measure()
         }
 
-        const applyDelta = (d: number): void => {
-            let next = target + d
+        // Scroll magnético (tipo PPT): um gesto avança/volta UMA cena inteira e
+        // trava até a transição assentar — nunca descansa no meio.
+        const step = (dir: number): void => {
+            if (wheelLock) return
 
-            next = Math.max(pos - MOTION.maxLead, Math.min(pos + MOTION.maxLead, next))
-            next = Math.max(0, Math.min(N - 1, next))
+            const next = Math.max(0, Math.min(N - 1, Math.round(target) + dir))
 
-            target = reduced ? Math.round(next) : next
+            if (next === target) return
+
+            target = next
+            wheelLock = true
+
+            window.clearTimeout(lockTimer)
+            lockTimer = window.setTimeout(() => {
+                wheelLock = false
+            }, 700)
         }
 
         const localPoint = (clientX: number, clientY: number): { x: number, y: number } => {
@@ -163,7 +174,10 @@ export const PixelsScroller: FC = (): ReactNode => {
             if (!over) return
 
             event.preventDefault()
-            applyDelta(event.deltaY * MOTION.wheelSens)
+
+            if (Math.abs(event.deltaY) < 2) return
+
+            step(event.deltaY > 0 ? 1 : -1)
         }
 
         const onTouchStart = (event: TouchEvent): void => {
@@ -174,11 +188,15 @@ export const PixelsScroller: FC = (): ReactNode => {
         const onTouchMove = (event: TouchEvent): void => {
             if (!over) return
 
-            const y = event.touches[0]?.clientY ?? prevTouchY
-
             event.preventDefault()
-            applyDelta((prevTouchY - y) * MOTION.wheelSens * 2.4)
-            prevTouchY = y
+
+            const y = event.touches[0]?.clientY ?? prevTouchY
+            const dy = prevTouchY - y
+
+            if (Math.abs(dy) > 24) {
+                step(dy > 0 ? 1 : -1)
+                prevTouchY = y
+            }
         }
 
         const onPointerMove = (event: PointerEvent): void => {
@@ -523,6 +541,7 @@ export const PixelsScroller: FC = (): ReactNode => {
 
         return () => {
             window.cancelAnimationFrame(frame)
+            window.clearTimeout(lockTimer)
             observer.disconnect()
             resizeObserver.disconnect()
             themeObserver.disconnect()
