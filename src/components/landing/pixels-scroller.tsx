@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react'
 
 import { cn } from '@/lib/utils'
 import { Reveal } from '@/components/generals/reveal'
-import { MimoAnim } from '@/components/landing/mimo-anim'
+import { MimoLook } from '@/components/landing/mimo-look'
 import { offerings } from '@/constants/offerings'
 
 import {
@@ -578,7 +578,7 @@ export const PixelsScroller: FC = (): ReactNode => {
                     className='absolute left-1/2 top-1/2 flex w-[min(68vw,500px)] -translate-x-1/2 -translate-y-1/2 flex-col items-center'
                 >
                     <div className='aspect-square w-full'>
-                        <MimoAnim className='size-full' />
+                        <MimoLook className="size-full" />
                     </div>
 
                     <p className='label-chrome -mt-[6%] text-center text-px-muted'>
