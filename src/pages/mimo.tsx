@@ -1,15 +1,9 @@
 import type { FC, ReactNode } from 'react'
 
-import dynamic from 'next/dynamic'
-
 import { Seo } from '@/components/generals/seo'
 import { Layout } from '@/components/generals/layout'
 import { Reveal } from '@/components/generals/reveal'
-
-const MimoThree = dynamic(
-    () => import('@/components/landing/mimo-three').then((m) => m.MimoThree),
-    { ssr: false }
-)
+import { MimoTilt } from '@/components/landing/mimo-tilt'
 
 const Mimo3D: FC = (): ReactNode => {
     return (
@@ -30,7 +24,7 @@ const Mimo3D: FC = (): ReactNode => {
                 />
 
                 <div className='absolute inset-0 z-0'>
-                    <MimoThree />
+                    <MimoTilt />
                 </div>
 
                 <Reveal
