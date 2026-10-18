@@ -1,0 +1,25 @@
+MIMO — SEU SITE NOVO
+====================
+
+O site já está pronto e no ar:
+https://luisroquette-labs.github.io/mimo-site/
+
+Abra o link, dê uma olhada e role a página pra ver o efeito.
+
+
+PARA DEIXAR O SITE SEU (no Lovable)
+-----------------------------------
+
+Você não precisa mexer em nada técnico, nem no GitHub. O Lovable faz tudo.
+
+1. Entre no Lovable (lovable.dev) e comece um projeto novo.
+2. Abra o arquivo PROMPT-LOVABLE.md (nesta mesma pasta), copie TODO o texto
+   dele e cole na conversa do Lovable.
+3. Envie. O Lovable vai montar o site a partir deste código e, no final, vai
+   te dizer em passos simples o que ainda falta ligar:
+      - o formulário de contato (pra você receber mensagens);
+      - os botões "Jogar com o Mimo" e "Criar conta" (os links do seu jogo);
+      - outros links, se tiver.
+   É só responder o que ele perguntar.
+
+Pronto. Qualquer dúvida, fala com o Luis.
