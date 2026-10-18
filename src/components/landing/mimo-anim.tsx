@@ -14,8 +14,8 @@ const SRC = 480
 // Inclinação do bicho inteiro seguindo o cursor (pivô nos pés → "vira pra te olhar").
 const PIVOT_X = 240
 const PIVOT_Y = 442
-const MAX_ANGLE = 0.1 // rad (~6°)
-const MAX_SHIFT = 10 // px (fonte)
+const MAX_ANGLE = 0.17 // rad (~10°)
+const MAX_SHIFT = 22 // px (fonte)
 const EASE = 7
 
 const frameSrc = (i: number): string =>
