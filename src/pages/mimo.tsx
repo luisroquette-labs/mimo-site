@@ -7,7 +7,7 @@ import { Layout } from '@/components/generals/layout'
 import { Reveal } from '@/components/generals/reveal'
 
 const MimoScene = dynamic(
-    () => import('@/components/landing/mimo-head-follow').then((m) => m.MimoHeadFollow),
+    () => import('@/components/landing/mimo-look').then((m) => m.MimoLook),
     { ssr: false }
 )
 

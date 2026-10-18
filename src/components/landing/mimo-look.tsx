@@ -6,16 +6,17 @@ import { useEffect, useRef } from 'react'
 
 import { asset } from '@/lib/base-path'
 
-// Strip linear: frame 0 = cabeça virada p/ esquerda, FRAMES-1 = p/ direita, meio = frente.
+// Frames de UM giro natural do Seedance (tronco+pescoço), ordenados esquerda→centro→direita.
+// O cursor controla o quadro = a cabeça acompanha. Sem cortes: cada quadro é o bicho inteiro.
 const FRAMES = 21
-// +1: cabeça segue o cursor. Inverter (-1) espelha o lado.
+// +1: olha pro lado do cursor. Inverter (-1) troca o lado.
 const DIR = 1
 const EASE = 9
 
 const frameSrc = (i: number): string =>
-    asset(`/mimo-head/f${String(i).padStart(2, '0')}.webp`)
+    asset(`/mimo-look/f${String(i).padStart(2, '0')}.webp`)
 
-export const MimoHeadFollow: FC = (): ReactNode => {
+export const MimoLook: FC = (): ReactNode => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     useEffect(() => {
@@ -46,26 +47,21 @@ export const MimoHeadFollow: FC = (): ReactNode => {
         const resize = (): void => {
             const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
             const rect = canvas.getBoundingClientRect()
+            const size = Math.min(rect.width, rect.height)
 
-            canvas.width = Math.round(rect.width * dpr)
-            canvas.height = Math.round(rect.height * dpr)
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+            canvas.width = Math.round(size * dpr)
+            canvas.height = Math.round(size * dpr)
         }
 
         const render = (): void => {
-            const rect = canvas.getBoundingClientRect()
-
-            ctx.clearRect(0, 0, rect.width, rect.height)
+            ctx.setTransform(1, 0, 0, 1, 0, 0)
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
 
             const i = Math.max(0, Math.min(FRAMES - 1, Math.round(current)))
             const img = images[i]
 
             if (img && img.complete && img.naturalWidth) {
-                const size = Math.min(rect.width, rect.height)
-                const dx = (rect.width - size) / 2
-                const dy = (rect.height - size) / 2
-
-                ctx.drawImage(img, dx, dy, size, size)
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
             }
         }
 
@@ -74,11 +70,9 @@ export const MimoHeadFollow: FC = (): ReactNode => {
 
             last = t
             current += (target - current) * Math.min(EASE * dt, 1)
-
             render()
 
-            // Para o loop quando estabiliza — sem repaint ocioso.
-            if (Math.abs(target - current) < 0.2) {
+            if (Math.abs(target - current) < 0.08) {
                 current = target
                 render()
                 running = false
@@ -121,7 +115,7 @@ export const MimoHeadFollow: FC = (): ReactNode => {
         <div className='flex size-full items-center justify-center'>
             <canvas
                 ref={canvasRef}
-                aria-label='Mimo em 3D — a cabeça segue o cursor'
+                aria-label='Mimo em 3D — a cabeça acompanha o cursor'
                 className='aspect-square w-[min(74vw,620px)] max-h-[82svh]'
                 style={{ touchAction: 'none' }}
             />
