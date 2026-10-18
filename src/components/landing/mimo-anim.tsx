@@ -21,7 +21,7 @@ const EASE = 7
 const frameSrc = (i: number): string =>
     asset(`/mimo-anim/f${String(i).padStart(2, '0')}.webp`)
 
-export const MimoAnim: FC = (): ReactNode => {
+export const MimoAnim: FC<{ className?: string }> = ({ className }): ReactNode => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     useEffect(() => {
@@ -119,7 +119,7 @@ export const MimoAnim: FC = (): ReactNode => {
             <canvas
                 ref={canvasRef}
                 aria-label='Mimo — pisca, mexe a boca e acompanha o cursor'
-                className='aspect-square w-[min(74vw,620px)] max-h-[82svh]'
+                className={className ?? 'aspect-square w-[min(74vw,620px)] max-h-[82svh]'}
                 style={{ touchAction: 'none' }}
             />
         </div>

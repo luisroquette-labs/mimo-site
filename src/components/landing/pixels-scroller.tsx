@@ -4,8 +4,8 @@ import type { Field } from '@/types'
 import { useEffect, useRef } from 'react'
 
 import { cn } from '@/lib/utils'
-import { asset } from '@/lib/base-path'
 import { Reveal } from '@/components/generals/reveal'
+import { MimoAnim } from '@/components/landing/mimo-anim'
 import { offerings } from '@/constants/offerings'
 
 import {
@@ -28,7 +28,7 @@ const AUTH_URL = 'https://mimooo.lovable.app/auth'
 export const PixelsScroller: FC = (): ReactNode => {
     const sectionRef = useRef<HTMLElement | null>(null)
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
-    const videoRef = useRef<HTMLImageElement | null>(null)
+    const videoRef = useRef<HTMLDivElement | null>(null)
     const ctaRef = useRef<HTMLDivElement | null>(null)
     const lineRef = useRef<HTMLDivElement | null>(null)
     const headRefs = useRef<Array<HTMLDivElement | null>>([])
@@ -573,12 +573,18 @@ export const PixelsScroller: FC = (): ReactNode => {
                     />
                 </Reveal>
 
-                <img
+                <div
                     ref={videoRef}
-                    src={asset('/mimo-dance.webp')}
-                    alt='Mimo, o bichinho azul, dançando'
-                    className='pointer-events-none absolute left-1/2 top-1/2 w-[46%] max-w-[300px] -translate-x-1/2 -translate-y-1/2 object-contain'
-                />
+                    className='absolute left-1/2 top-1/2 flex w-[min(60vw,380px)] -translate-x-1/2 -translate-y-1/2 flex-col items-center'
+                >
+                    <div className='aspect-square w-full'>
+                        <MimoAnim className='size-full' />
+                    </div>
+
+                    <p className='label-chrome -mt-[6%] text-center text-px-muted'>
+                        Mova o mouse — o Mimo te segue
+                    </p>
+                </div>
             </div>
 
             <div
