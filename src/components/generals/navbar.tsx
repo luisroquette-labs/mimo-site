@@ -44,7 +44,7 @@ export const Navbar: FC = (): ReactNode => {
             <nav
                 aria-label='Primary'
                 className={cn(
-                    'grid grid-cols-5 items-center transition-[background-color,border-color] duration-500',
+                    'grid grid-cols-6 items-center transition-[background-color,border-color] duration-500',
                     'gap-x-[clamp(4px,1.5vw,16px)] px-[clamp(12px,3vw,44px)] py-[clamp(12px,2.2vh,22px)]',
                     'border-b border-transparent',
                     scrolled && 'border-px-hairline bg-px-bg/85 backdrop-blur-md'
