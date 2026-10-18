@@ -575,7 +575,7 @@ export const PixelsScroller: FC = (): ReactNode => {
 
                 <div
                     ref={videoRef}
-                    className='absolute left-1/2 top-1/2 flex w-[min(60vw,380px)] -translate-x-1/2 -translate-y-1/2 flex-col items-center'
+                    className='absolute left-1/2 top-1/2 flex w-[min(68vw,500px)] -translate-x-1/2 -translate-y-1/2 flex-col items-center'
                 >
                     <div className='aspect-square w-full'>
                         <MimoAnim className='size-full' />

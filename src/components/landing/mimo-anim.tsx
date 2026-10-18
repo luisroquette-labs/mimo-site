@@ -14,9 +14,9 @@ const SRC = 480
 // Inclinação do bicho inteiro seguindo o cursor (pivô nos pés → "vira pra te olhar").
 const PIVOT_X = 240
 const PIVOT_Y = 442
-const MAX_ANGLE = 0.17 // rad (~10°)
-const MAX_SHIFT = 22 // px (fonte)
-const EASE = 7
+const MAX_ANGLE = 0.19 // rad (~11°)
+const MAX_SHIFT = 40 // px (fonte) — desliza na direção do cursor
+const EASE = 11
 
 const frameSrc = (i: number): string =>
     asset(`/mimo-anim/f${String(i).padStart(2, '0')}.webp`)
