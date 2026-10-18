@@ -14,22 +14,16 @@ const shots = [
     {
         n: '01',
         label: 'Cuidar',
-        src: '/jogo/gameplay-cuidar.webp',
-        alt: 'Tela de cuidados do Mimo: fome, energia, higiene, felicidade e saúde',
         body: 'Comidinha, banho e soneca. Cinco indicadores pra manter o Mimo feliz, saudável e de bem com a vida.'
     },
     {
         n: '02',
         label: 'Brincar',
-        src: '/jogo/gameplay-brincar.webp',
-        alt: 'Lista de minijogos do Mimo',
         body: 'Cinco minijogos — Chuva de Orvalho, Pares do Jardim, Vagalume Veloz e mais — rendem recordes e MimoCoins.'
     },
     {
         n: '03',
         label: 'Personalizar',
-        src: '/jogo/gameplay-loja.webp',
-        alt: 'Loja do Mimo com comidas, móveis e acessórios',
         body: 'Gaste as moedas na loja: comidas, móveis e acessórios pra deixar o cantinho com a sua cara.'
     }
 ]
@@ -72,46 +66,57 @@ const Jogo: FC = (): ReactNode => {
 
             <section id='telas' className='border-b border-px-hairline'>
                 <Container className='py-[clamp(56px,10vh,120px)]'>
-                    <ul className='grid gap-[clamp(28px,4vw,56px)] min-[821px]:grid-cols-3'>
-                        {shots.map((shot, index) => (
-                            <Reveal
-                                key={shot.label}
-                                as='li'
-                                delay={index * 120}
-                                duration={900}
-                                distance={24}
-                                className='flex flex-col'
-                            >
-                                <div className='flex items-baseline justify-between border-b border-px-hairline pb-3'>
-                                    <span className='font-display text-[clamp(18px,2vw,24px)] font-medium tracking-[-0.01em] text-px-text'>
-                                        {shot.label}
-                                    </span>
+                    <div className='grid items-center gap-[clamp(36px,6vw,88px)] min-[821px]:grid-cols-[minmax(0,1fr)_minmax(0,320px)]'>
+                        <ol className='order-2 min-[821px]:order-1'>
+                            {shots.map((shot, index) => (
+                                <Reveal
+                                    key={shot.label}
+                                    as='li'
+                                    delay={index * 110}
+                                    duration={850}
+                                    distance={20}
+                                    className='group border-b border-px-hairline py-[clamp(18px,2.6vh,28px)] first:border-t'
+                                >
+                                    <div className='flex items-baseline gap-4'>
+                                        <span className='label-fixed text-px-muted'>
+                                            {shot.n}
+                                        </span>
 
-                                    <span className='label-fixed text-px-muted'>
-                                        {shot.n}
-                                    </span>
-                                </div>
+                                        <h3 className='font-display text-[clamp(20px,2.4vw,28px)] font-medium leading-[1.2] tracking-[-0.01em] text-px-text'>
+                                            {shot.label}
+                                        </h3>
+                                    </div>
 
-                                <div className='relative mt-5 overflow-hidden border border-px-hairline bg-px-grid/40'>
-                                    <div
-                                        aria-hidden='true'
-                                        className='paper-grid pointer-events-none absolute inset-0 opacity-60 [--paper-cell:16px]'
-                                    />
+                                    <p className='mt-2 max-w-[46ch] pl-[calc(0.12em+2.6em)] text-[13.5px] leading-[1.6] text-px-muted'>
+                                        {shot.body}
+                                    </p>
+                                </Reveal>
+                            ))}
+                        </ol>
 
-                                    <img
-                                        src={asset(shot.src)}
-                                        alt={shot.alt}
-                                        loading='lazy'
-                                        className='relative mx-auto block w-[78%] max-w-[260px] py-[clamp(18px,3vw,34px)]'
-                                    />
-                                </div>
+                        <Reveal mode='fade' duration={900} className='order-1 min-[821px]:order-2'>
+                            <div className='relative mx-auto w-[min(300px,74vw)] overflow-hidden border border-px-hairline bg-px-grid/40 p-[clamp(14px,2vw,22px)]'>
+                                <div
+                                    aria-hidden='true'
+                                    className='paper-grid pointer-events-none absolute inset-0 opacity-60 [--paper-cell:16px]'
+                                />
 
-                                <p className='mt-5 max-w-[34ch] text-[13.5px] leading-[1.6] text-px-muted'>
-                                    {shot.body}
-                                </p>
-                            </Reveal>
-                        ))}
-                    </ul>
+                                <video
+                                    src={asset('/jogo/gameplay-demo.mp4')}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    aria-label='Demonstração do jogo Mimo: cuidar, banho, minijogos e loja'
+                                    className='relative block w-full border border-px-hairline'
+                                />
+                            </div>
+
+                            <p className='mt-4 text-center label-chrome text-px-muted'>
+                                Gameplay real — sem conta
+                            </p>
+                        </Reveal>
+                    </div>
                 </Container>
             </section>
 
