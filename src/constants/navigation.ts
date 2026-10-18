@@ -3,7 +3,7 @@ import type { FooterCell, NavItem } from '@/types'
 export const navItems: NavItem[] = [
     { label: 'Mimo°', href: '/' },
     { label: 'O jogo', href: '/jogo' },
-    { label: 'Mimo 3D', href: '/mimo' },
+    { label: 'O Mimo', href: '/mimo' },
     { label: 'Sobre', href: '/about' },
     { label: 'Contato', href: '/contact' }
 ]

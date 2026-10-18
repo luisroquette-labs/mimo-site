@@ -7,15 +7,15 @@ import { Reveal } from '@/components/generals/reveal'
 
 const Mimo3D: FC = (): ReactNode => {
     return (
-        <Layout fixed indexLabel='Index / Mimo 3D'>
+        <Layout fixed indexLabel='Index / O Mimo'>
             <Seo
-                title='Mimo 3D'
+                title='O Mimo'
                 description='Conheça o Mimo — seu bichinho virtual sempre de bom humor. Cuide, brinque e deixe o cantinho com a sua cara.'
             />
 
             <section
                 id='mimo-3d'
-                aria-label='Mimo em 3D que segue o cursor'
+                aria-label='O Mimo, seu bichinho virtual'
                 className='relative h-[100svh] w-full overflow-hidden bg-px-bg text-px-text'
             >
                 <div
